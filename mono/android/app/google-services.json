@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "656350468641",
+    "project_id": "mono-e4a22",
+    "storage_bucket": "mono-e4a22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656350468641:android:c0b09950722e7cb0476160",
+        "android_client_info": {
+          "package_name": "com.example.mono"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtYJVMue-xx5rF7FmICBdb5UfA92sOHQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
