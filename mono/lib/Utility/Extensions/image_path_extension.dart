@@ -4,4 +4,7 @@ extension ImagePathExtension on ImagePath {
   String toPathSvg() {
     return "assets/Images/im_$name.svg";
   }
+  String toPathPng() {
+    return "assets/Images/im_$name.png";
+  }
 }
