@@ -1,0 +1,1 @@
+enum IconPath { mono }

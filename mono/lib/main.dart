@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'Presentation/Screens/Splash/splash_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -15,16 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mono',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
-    );
+
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+    return const MaterialApp(debugShowCheckedModeBanner: false, title: 'Mono', home: SplashPage());
   }
 }
