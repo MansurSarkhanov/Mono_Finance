@@ -78,8 +78,14 @@ class _LoginPageState extends State<LoginPage> {
                                 delay: 4,
                                 isLeft: true,
                                 isVertical: false,
-                                child: CustomField(
-                                  hintText: "Email Address",
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Email Address'),
+                                    CustomField(
+                                      hintText: "email@gmail.com",
+                                    ),
+                                  ],
                                 ),
                               ),
                               const BounceFromBottomAnimation(
@@ -87,8 +93,14 @@ class _LoginPageState extends State<LoginPage> {
                                 delay: 4,
                                 isLeft: false,
                                 isVertical: false,
-                                child: CustomField(
-                                  hintText: "Passowrd",
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Password'),
+                                    CustomField(
+                                      hintText: "*******",
+                                    ),
+                                  ],
                                 ),
                               ),
                               BounceFromBottomAnimation(
