@@ -7,12 +7,15 @@ class BounceFromBottomAnimation extends StatefulWidget {
       required this.delay,
       this.isVertical = true,
       this.isLeft = false,
-      this.isBigOffset = false});
+      this.isBigOffset = false,
+      this.isTop = false});
 
   final Widget child;
   final double delay;
   final bool isVertical;
   final bool isLeft;
+  final bool isTop;
+
   final bool isBigOffset;
 
 
@@ -40,7 +43,11 @@ class _BounceFromBottomAnimationState extends State<BounceFromBottomAnimation> w
                 ? (widget.isBigOffset)
                     ? -500
                     : -100.0
-                : (widget.isBigOffset)?500:100,
+                : (widget.isBigOffset)
+                    ? 500
+                    : (widget.isTop)
+                        ? -100
+                        : 100,
             end: 0.0)
         .animate(curve) // Adjust the end value for less bounce
       ..addListener(() {
