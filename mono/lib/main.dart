@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'Presentation/Screens/Login/login_page.dart';
 import 'firebase_options.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mono',
-      home: LoginPage(),
+      theme: ThemeData(textTheme: GoogleFonts.ubuntuTextTheme()),
+      home: const LoginPage(),
     );
   }
 }

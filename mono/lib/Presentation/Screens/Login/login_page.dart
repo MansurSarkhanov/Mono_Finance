@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/colors.dart';
+import 'package:mono/Presentation/Animations/bounce_animation.dart';
+import 'package:mono/Presentation/Components/Buttons/login_button.dart';
 import 'package:mono/Utility/Extensions/image_path_extension.dart';
 
 import '../../../Core/Constants/Path/image_path.dart';
+import '../../Components/Inputs/custom_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -40,19 +43,52 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Login"),
+                  const Text(
+                    "Login",
+                    style: TextStyle(fontSize: 32),
+                  ),
                   const Text("Please login to continue"),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Container(
                     decoration: BoxDecoration(
+                      boxShadow: const [BoxShadow(blurRadius: 100, color: AppColors.primaryColor)],
+                      borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                      border: Border.all(color: AppColors.primaryColor),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12),
                       child: Column(
                         children: [
-                          TextField(),
-                          TextField(),
+                          const BounceFromBottomAnimation(
+                            isBigOffset: true,
+                            delay: 3,
+                            isLeft: true,
+                            isVertical: false,
+                            child: CustomField(
+                              hintText: "Email Address",
+                            ),
+                          ),
+                          const BounceFromBottomAnimation(
+                            isBigOffset: true,
+                            delay: 3,
+                            isLeft: false,
+                            isVertical: false,
+                            child: CustomField(
+                              hintText: "Passowrd",
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(activeColor: AppColors.primaryColor, value: true, onChanged: (value) {}),
+                              const Text("Remember me"),
+                              const Spacer(),
+                              TextButton(onPressed: () {}, child: const Text("Forget Password"))
+                            ],
+                          ),
+                          const LoginButton()
+
                         ],
                       ),
                     ),

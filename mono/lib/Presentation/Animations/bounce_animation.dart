@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 
 class BounceFromBottomAnimation extends StatefulWidget {
   const BounceFromBottomAnimation(
-      {super.key, required this.child, required this.delay, this.isVertical = true, this.isLeft = false});
+      {super.key,
+      required this.child,
+      required this.delay,
+      this.isVertical = true,
+      this.isLeft = false,
+      this.isBigOffset = false});
 
   final Widget child;
   final double delay;
   final bool isVertical;
   final bool isLeft;
+  final bool isBigOffset;
+
 
   @override
   _BounceFromBottomAnimationState createState() => _BounceFromBottomAnimationState();
@@ -28,7 +35,13 @@ class _BounceFromBottomAnimationState extends State<BounceFromBottomAnimation> w
     final Animation<double> curve =
         CurvedAnimation(parent: controller, curve: Curves.easeInOutQuint); // Use a smoother curve
 
-    animation = Tween<double>(begin: widget.isLeft ? -100.0 : 100, end: 0.0)
+    animation = Tween<double>(
+            begin: widget.isLeft
+                ? (widget.isBigOffset)
+                    ? -500
+                    : -100.0
+                : (widget.isBigOffset)?500:100,
+            end: 0.0)
         .animate(curve) // Adjust the end value for less bounce
       ..addListener(() {
         setState(() {});
