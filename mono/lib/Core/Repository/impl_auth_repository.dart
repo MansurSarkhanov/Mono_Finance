@@ -19,7 +19,15 @@ class ImplAuthRepository implements IAuthRepository {
         await _firebaseRef.doc(createUser.uid).set(userModel);
         return createUser;
       }
-    } catch (e) {}
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
     return null;
   }
 
@@ -29,7 +37,15 @@ class ImplAuthRepository implements IAuthRepository {
       final createUser = await _authDataSource.loginUserWithEmail(email: email, password: password);
       print(createUser?.uid);
       return createUser;
-    } catch (e) {}
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    } catch (e) {
+      print(e);
+    }
     return null;
   }
 }

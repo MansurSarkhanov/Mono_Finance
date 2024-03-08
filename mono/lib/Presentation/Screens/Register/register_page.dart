@@ -150,8 +150,9 @@ class RegisterPage extends ConsumerWidget {
                                         children: [
                                           const Text("Do you have an account?"),
                                           TextButton(
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 createPageRoute(context, LoginPage());
+
                                                 FocusManager.instance.primaryFocus?.unfocus();
 
                                               },
