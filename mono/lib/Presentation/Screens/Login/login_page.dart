@@ -15,10 +15,13 @@ class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context, ref) {
     final loginProvider = ref.watch(authProviderRef);
     return Scaffold(
+     
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -37,6 +40,7 @@ class LoginPage extends ConsumerWidget {
                         delay: 4,
                         child: Column(
                           children: [
+                           
                             Text(
                               "Login",
                               style: TextStyle(fontSize: 32),
