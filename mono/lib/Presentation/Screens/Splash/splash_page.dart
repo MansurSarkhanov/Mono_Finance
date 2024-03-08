@@ -4,8 +4,22 @@ import 'package:mono/Core/Constants/Path/icon_path.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Utility/Extensions/icon_path_extension.dart';
 
-class SplashPage extends StatelessWidget {
+import '../../../Riverpod/auth_provider.dart';
+
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  final SplashCheckProvider provider = SplashCheckProvider();
+  @override
+  void initState() {
+    super.initState();
+    provider.checkAuth();
+  }
 
   @override
   Widget build(BuildContext context) {
