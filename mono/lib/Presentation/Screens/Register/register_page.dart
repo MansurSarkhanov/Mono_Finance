@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
 import 'package:mono/Presentation/Animations/page_route.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
 import 'package:mono/Presentation/Screens/Login/login_page.dart';
+import 'package:mono/Riverpod/auth_provider.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
+import '../Home/home_page.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterPage extends ConsumerWidget {
+  RegisterPage({super.key});
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final registerProvider = ref.watch(registerAuthProvider);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -122,7 +124,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                       delay: 3,
                                       child: AuthButton(
                                         title: "Register",
-                                        onPress: () {},
+                                        onPress: () {
+                                          registerProvider.when(
+                                            data: (data) async {
+                                              await data.createUserWithEmail(
+                                                  email: _emailController.text,
+                                                  password: _passwordController.text,
+                                                  username: _usernameController.text);
+                                              createPageRoute(context, const HomePage());
+                                            },
+                                            error: (error, stackTrace) => Text(error.toString()),
+                                            loading: () => const CircularProgressIndicator(),
+                                          );
+                                        },
                                       )),
                                   BounceFromBottomAnimation(
                                       delay: 4,

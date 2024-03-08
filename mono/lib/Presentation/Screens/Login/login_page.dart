@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                                           const Text("Don't have an account?"),
                                           TextButton(
                                               onPressed: () {
-                                                createPageRoute(context, const RegisterPage());
+                                                createPageRoute(context, RegisterPage());
                                               },
                                               child: const Text("Sign up"))
                                         ],
