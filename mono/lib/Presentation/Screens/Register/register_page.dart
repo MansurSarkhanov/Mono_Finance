@@ -19,7 +19,7 @@ class RegisterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final registerProvider = ref.watch(registerAuthProvider);
+    final authProvider = ref.watch(authProviderRef);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -130,11 +130,8 @@ class RegisterPage extends ConsumerWidget {
                                       child: AuthButton(
                                         title: "Register",
                                         onPress: () {
-                                          registerProvider.when(
+                                          authProvider.when(
                                             data: (data) async {
-                                            
-                                              
-
                                               await data.createUserWithEmail(
                                                   email: _emailController.text,
                                                   password: _passwordController.text,
@@ -154,7 +151,9 @@ class RegisterPage extends ConsumerWidget {
                                           const Text("Do you have an account?"),
                                           TextButton(
                                               onPressed: () {
-                                                createPageRoute(context, const LoginPage());
+                                                createPageRoute(context, LoginPage());
+                                                FocusManager.instance.primaryFocus?.unfocus();
+
                                               },
                                               child: const Text("Sign In"))
                                         ],

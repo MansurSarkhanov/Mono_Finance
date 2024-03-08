@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
 import 'package:mono/Presentation/Animations/page_route.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
 import 'package:mono/Presentation/Screens/Register/register_page.dart';
+import 'package:mono/Riverpod/auth_provider.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends ConsumerWidget {
+  LoginPage({super.key});
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final loginProvider = ref.watch(authProviderRef);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -111,7 +108,11 @@ class _LoginPageState extends State<LoginPage> {
                                       delay: 3,
                                       child: AuthButton(
                                         title: "Login",
-                                        onPress: () {},
+                                        onPress: () {
+                                          loginProvider.value?.loginUserWithEmail(
+                                              email: _emailController.text, password: _passwordController.text);
+                                          FocusManager.instance.primaryFocus?.unfocus();
+                                        },
                                       )),
                                   BounceFromBottomAnimation(
                                       delay: 4,

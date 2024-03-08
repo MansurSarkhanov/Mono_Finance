@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(textTheme: GoogleFonts.ubuntuTextTheme()),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }

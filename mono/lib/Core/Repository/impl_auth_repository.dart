@@ -9,19 +9,27 @@ class ImplAuthRepository implements IAuthRepository {
   final _authDataSource = AuthDataSource();
 
   @override
-  Future<User?> createUserWithEmail(
-      {required String email, required String password, required String username}) async {
+  Future<User?> createUserWithEmail({required String email, required String password, required String username}) async {
     try {
       final createUser = await _authDataSource.createUserWithEmail(email: email, password: password);
       if (createUser != null) {
-        final userModel = UserModel(
-                email: email, password: password, username: username, expenses: '0', income: '0', money: '0')
-            .toJson();
+        final userModel =
+            UserModel(email: email, password: password, username: username, expenses: '0', income: '0', money: '0')
+                .toJson();
         await _firebaseRef.doc(createUser.uid).set(userModel);
         return createUser;
       }
-    } catch (e) {
-    }
+    } catch (e) {}
+    return null;
+  }
+
+  @override
+  Future<User?> loginUserWithEmail({required String email, required String password}) async {
+    try {
+      final createUser = await _authDataSource.loginUserWithEmail(email: email, password: password);
+      print(createUser?.uid);
+      return createUser;
+    } catch (e) {}
     return null;
   }
 }
