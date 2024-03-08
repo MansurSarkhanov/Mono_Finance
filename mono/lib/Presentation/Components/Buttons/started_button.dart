@@ -10,10 +10,11 @@ class StartedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
+    return Padding(
+      padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24),
       child: PrimaryButton(
-        child: Center(
+        onPress: () {},
+        child: const Center(
             child: Text(
           AppStrings.startButton,
           style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),

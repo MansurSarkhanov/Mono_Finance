@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../Core/Constants/colors.dart';
 
 class PrimaryButton extends StatefulWidget {
-  const PrimaryButton({super.key, required this.child});
+  const PrimaryButton({super.key, required this.child, required this.onPress});
   final Widget child;
+  final VoidCallback onPress;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -14,6 +15,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: widget.onPress,
       child: Container(
         decoration: const BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 14, offset: Offset(1, 8), color: AppColors.primaryColor)],

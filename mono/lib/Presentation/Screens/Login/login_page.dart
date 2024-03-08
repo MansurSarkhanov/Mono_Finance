@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
-import 'package:mono/Utility/Extensions/image_path_extension.dart';
 
-import '../../../Core/Constants/Path/image_path.dart';
 import '../../Components/Inputs/custom_field.dart';
+import '../../Components/auth_background.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,22 +19,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: SvgPicture.asset(
-                  ImagePath.onboarding.toPathSvg(),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Expanded(
-                child: SvgPicture.asset(
-                  ImagePath.onboarding.toPathSvg(),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
+          const AuthBackground(),
+
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Center(
@@ -115,7 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                                     ],
                                   ),
                                 ),
-                                const BounceFromBottomAnimation(delay: 3, child: LoginButton()),
+                                BounceFromBottomAnimation(
+                                    delay: 3,
+                                    child: AuthButton(
+                                      title: "Login",
+                                      onPress: () {},
+                                    )),
                                 BounceFromBottomAnimation(
                                     delay: 4,
                                     child: Row(

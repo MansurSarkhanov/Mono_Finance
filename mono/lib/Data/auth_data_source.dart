@@ -5,7 +5,6 @@ final class AuthDataSource {
 
   Future<User?> createUserWithEmail({required String email, required String password}) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-
     if (userCredential.user != null) {
       final user = userCredential.user;
       return user;
