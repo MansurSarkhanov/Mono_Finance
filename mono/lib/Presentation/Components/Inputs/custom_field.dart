@@ -5,8 +5,10 @@ class CustomField extends StatelessWidget {
   const CustomField({
     super.key,
     required this.hintText,
+    required this.controller,
   });
   final String hintText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class CustomField extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, bottom: 4),
             child: TextField(
+              controller: controller,
               cursorColor: AppColors.primaryColor,
               decoration: InputDecoration(
                   border: InputBorder.none,

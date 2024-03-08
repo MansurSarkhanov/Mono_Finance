@@ -14,8 +14,10 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
                               child: Column(
                                 children: [
-                                  const BounceFromBottomAnimation(
+                                  BounceFromBottomAnimation(
                                     isBigOffset: true,
                                     delay: 4,
                                     isLeft: true,
@@ -69,14 +71,15 @@ class _LoginPageState extends State<LoginPage> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Email Address'),
+                                        const Text('Email Address'),
                                         CustomField(
+                                          controller: _emailController,
                                           hintText: "email@gmail.com",
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const BounceFromBottomAnimation(
+                                  BounceFromBottomAnimation(
                                     isBigOffset: true,
                                     delay: 4,
                                     isLeft: false,
@@ -84,8 +87,9 @@ class _LoginPageState extends State<LoginPage> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Password'),
+                                        const Text('Password'),
                                         CustomField(
+                                          controller: _passwordController,
                                           hintText: "*******",
                                         ),
                                       ],

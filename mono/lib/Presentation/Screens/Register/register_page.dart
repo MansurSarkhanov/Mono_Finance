@@ -63,7 +63,7 @@ class RegisterPage extends ConsumerWidget {
                               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
                               child: Column(
                                 children: [
-                                  const BounceFromBottomAnimation(
+                                  BounceFromBottomAnimation(
                                     isBigOffset: true,
                                     delay: 4,
                                     isLeft: false,
@@ -71,14 +71,16 @@ class RegisterPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Username'),
+                                        const Text('Username'),
                                         CustomField(
+                                          
+                                          controller: _usernameController,
                                           hintText: "Jhon Harry",
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const BounceFromBottomAnimation(
+                                  BounceFromBottomAnimation(
                                     isBigOffset: true,
                                     delay: 4,
                                     isLeft: true,
@@ -86,14 +88,16 @@ class RegisterPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Email Address'),
+                                        const Text('Email Address'),
                                         CustomField(
+                                          controller: _emailController,
+
                                           hintText: "email@gmail.com",
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const BounceFromBottomAnimation(
+                                  BounceFromBottomAnimation(
                                     isBigOffset: true,
                                     delay: 4,
                                     isLeft: false,
@@ -101,8 +105,9 @@ class RegisterPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Password'),
+                                        const Text('Password'),
                                         CustomField(
+                                          controller: _passwordController,
                                           hintText: "*******",
                                         ),
                                       ],
@@ -127,6 +132,9 @@ class RegisterPage extends ConsumerWidget {
                                         onPress: () {
                                           registerProvider.when(
                                             data: (data) async {
+                                            
+                                              
+
                                               await data.createUserWithEmail(
                                                   email: _emailController.text,
                                                   password: _passwordController.text,
