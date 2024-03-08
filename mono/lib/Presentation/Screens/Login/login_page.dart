@@ -11,17 +11,20 @@ import 'package:mono/Riverpod/auth_provider.dart';
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
 
+final checkValue = StateProvider<bool>((ref) {
+  return false;
+});
+
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context, ref) {
     final loginProvider = ref.watch(authProviderRef);
+
     return Scaffold(
-     
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -40,7 +43,6 @@ class LoginPage extends ConsumerWidget {
                         delay: 4,
                         child: Column(
                           children: [
-                           
                             Text(
                               "Login",
                               style: TextStyle(fontSize: 32),
@@ -101,8 +103,15 @@ class LoginPage extends ConsumerWidget {
                                     delay: 4,
                                     child: Row(
                                       children: [
-                                        Checkbox(
-                                            activeColor: AppColors.primaryColor, value: true, onChanged: (value) {}),
+                                        Consumer(builder: (context, state, child) {
+                                          final isCheck = state.watch(checkValue);
+                                          return Checkbox(
+                                              activeColor: AppColors.primaryColor,
+                                              value: isCheck,
+                                              onChanged: (value) {
+                                                state.read(checkValue.state).state = value ?? false;
+                                              });
+                                        }),
                                         const Text("Remember me"),
                                         const Spacer(),
                                         TextButton(onPressed: () {}, child: const Text("Forget Password"))

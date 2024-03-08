@@ -4,6 +4,8 @@ import 'package:mono/Core/Constants/Path/image_path.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Constants/strings.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
+import 'package:mono/Presentation/Animations/page_route.dart';
+import 'package:mono/Presentation/Screens/Login/login_page.dart';
 import 'package:mono/Utility/Extensions/image_path_extension.dart';
 
 import '../../Components/Buttons/started_button.dart';
@@ -27,7 +29,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
           Center(
             child: BounceFromBottomAnimation(
               delay: 3,
-
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -81,7 +82,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           AppStrings.login,
                           style: TextStyle(color: AppColors.primaryColor),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          createPageRoute(context, LoginPage());
+                        },
                       ),
                     ],
                   ),

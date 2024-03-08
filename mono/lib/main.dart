@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mono/Presentation/Screens/Login/login_page.dart';
+import 'package:mono/Presentation/Screens/Onboarding/onboarding_page.dart';
 
 import 'firebase_options.dart';
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(textTheme: GoogleFonts.ubuntuTextTheme()),
-      home: LoginPage(),
+      home: const OnboardingPage(),
     );
   }
 }
