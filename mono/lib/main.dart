@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mono/Presentation/Screens/Register/register_page.dart';
+import 'package:mono/Presentation/Screens/Login/login_page.dart';
 
 import 'firebase_options.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(textTheme: GoogleFonts.ubuntuTextTheme()),
-      home: const RegisterPage(),
+      home: const LoginPage(),
     );
   }
 }

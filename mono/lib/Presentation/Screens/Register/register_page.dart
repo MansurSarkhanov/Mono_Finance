@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
+import 'package:mono/Presentation/Animations/page_route.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
+import 'package:mono/Presentation/Screens/Login/login_page.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
@@ -128,7 +130,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           const Text("Do you have an account?"),
-                                          TextButton(onPressed: () {}, child: const Text("Sign In"))
+                                          TextButton(
+                                              onPressed: () {
+                                                createPageRoute(context, const LoginPage());
+                                              },
+                                              child: const Text("Sign In"))
                                         ],
                                       )),
                                 ],
