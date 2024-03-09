@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mono',
-      theme: ThemeData(textTheme: GoogleFonts.ubuntuTextTheme()),
+      theme: ThemeData(
+        textTheme: GoogleFonts.ubuntuTextTheme(),
+        useMaterial3: true,
+      ),
       home: const SplashPage(),
     );
   }

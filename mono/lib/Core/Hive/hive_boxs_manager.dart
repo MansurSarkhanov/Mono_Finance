@@ -6,7 +6,7 @@ class HiveBoxsManager {
     box.put(key, value);
   }
 
-  readData({required String boxName, required String key}) async {
+  Future<bool?> readDataBool({required String boxName, required String key}) async {
     var box = await Hive.openBox(boxName);
     return box.get(key);
   }

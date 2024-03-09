@@ -5,6 +5,6 @@ abstract class IAuthRepository {
       {required String email, required String password, required String username});
 
   Future<User?> loginUserWithEmail({required String email, required String password});
-  Future<bool> checkAuth();
+  Future<bool?> checkAuth();
 
 }

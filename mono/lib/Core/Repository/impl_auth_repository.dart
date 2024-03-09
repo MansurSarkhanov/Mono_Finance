@@ -64,13 +64,12 @@ class ImplAuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<bool> checkAuth() async {
-    await Future.delayed(const Duration(seconds: 2));
-    print(_cacheManager.readData(boxName: 'auth', key: 'logged'));
-    final isAuth = _cacheManager.readData(boxName: 'auth', key: 'logged');
-    if (isAuth != null) {
-      return isAuth;
-    }
+  Future<bool?> checkAuth() async {
+    await Future.delayed(const Duration(seconds: 4));
+    final isAuth = await _cacheManager.readDataBool(boxName: 'auth', key: 'logged');
+    if (isAuth == true) {
+      return true;
+    } 
     return false;
   }
 }

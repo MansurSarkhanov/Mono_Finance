@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mono/Core/Repository/impl_auth_repository.dart';
 
@@ -7,13 +6,15 @@ final authProviderRef = FutureProvider<ImplAuthRepository>((ref) {
   return ref.watch(authProvider);
 });
 
-class SplashCheckProvider extends ChangeNotifier {
-  final _authRepo = ImplAuthRepository();
-  bool isSplash = false;
+final checkProvider = StateNotifierProvider((ref) {
+  return CheckStateNotifier();
+});
 
-  Future<bool> checkAuth() async {
-    isSplash = await _authRepo.checkAuth();
-    print(isSplash);
-    return isSplash;
+class CheckStateNotifier extends StateNotifier<bool?> {
+  CheckStateNotifier() : super(false);
+  final authState = ImplAuthRepository();
+  Future<bool?> checkAuth() async {
+    state = await authState.checkAuth();
+    return state;
   }
 }
