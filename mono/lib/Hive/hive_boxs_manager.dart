@@ -10,4 +10,8 @@ class HiveBoxsManager {
     var box = await Hive.openBox(boxName);
     return box.get(key);
   }
+  Future<String?> readDataString({required String boxName, required String key}) async {
+    var box = await Hive.openBox(boxName);
+    return box.get(key);
+  }
 }
