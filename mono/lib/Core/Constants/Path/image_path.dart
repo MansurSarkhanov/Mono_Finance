@@ -1,1 +1,1 @@
-enum ImagePath { coint, donat, men, onboarding }
+enum ImagePath { coint, donat, men, onboarding, card }

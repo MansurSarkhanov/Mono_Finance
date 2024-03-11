@@ -132,6 +132,7 @@ class RegisterPage extends ConsumerWidget {
                                                   email: _emailController.text,
                                                   password: _passwordController.text,
                                                   username: _usernameController.text);
+                                              context.go('/home');
                                             },
                                             error: (error, stackTrace) => Text(error.toString()),
                                             loading: () => const CircularProgressIndicator(),

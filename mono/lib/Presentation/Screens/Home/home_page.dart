@@ -24,7 +24,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: InkWell(
           child: Container(
-            decoration: const BoxDecoration(color: AppColors.primaryColor, shape: BoxShape.circle),
+            decoration: const BoxDecoration(boxShadow: [
+              BoxShadow(color: AppColors.primaryColor, blurRadius: 15),
+            ], color: AppColors.primaryColor, shape: BoxShape.circle),
             child: const Padding(
               padding: EdgeInsets.all(20.0),
               child: Icon(

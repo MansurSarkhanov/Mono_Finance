@@ -32,7 +32,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(
-        textTheme: GoogleFonts.ubuntuTextTheme(),
+        textTheme: GoogleFonts.ubuntuTextTheme().apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+        ),
         useMaterial3: true,
       ),
      

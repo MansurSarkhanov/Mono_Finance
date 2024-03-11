@@ -123,6 +123,8 @@ class LoginPage extends ConsumerWidget {
                                         onPress: () {
                                           loginProvider.value?.loginUserWithEmail(
                                               email: _emailController.text, password: _passwordController.text);
+
+                                          context.go('/home');
                                           FocusManager.instance.primaryFocus?.unfocus();
                                         },
                                       )),
