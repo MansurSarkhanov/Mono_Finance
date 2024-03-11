@@ -43,9 +43,12 @@ class LoginPage extends ConsumerWidget {
                           children: [
                             Text(
                               "Login",
-                              style: TextStyle(fontSize: 32),
+                              style: TextStyle(fontSize: 32, color: Colors.black),
                             ),
-                            Text("Please login to continue"),
+                            Text(
+                              "Please login to continue",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ],
                         ),
                       ),
@@ -73,7 +76,10 @@ class LoginPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        const Text('Email Address'),
+                                        const Text(
+                                          'Email Address',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         CustomField(
                                           controller: _emailController,
                                           hintText: "email@gmail.com",
@@ -89,7 +95,10 @@ class LoginPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        const Text('Password'),
+                                        const Text(
+                                          'Password',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         CustomField(
                                           controller: _passwordController,
                                           hintText: "*******",
@@ -110,7 +119,10 @@ class LoginPage extends ConsumerWidget {
                                                 state.read(checkValue.state).state = value ?? false;
                                               });
                                         }),
-                                        const Text("Remember me"),
+                                        const Text(
+                                          "Remember me",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         const Spacer(),
                                         TextButton(onPressed: () {}, child: const Text("Forget Password"))
                                       ],
@@ -133,7 +145,10 @@ class LoginPage extends ConsumerWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Text("Don't have an account?"),
+                                          const Text(
+                                            "Don't have an account?",
+                                            style: TextStyle(color: Colors.black),
+                                          ),
                                           TextButton(
                                               onPressed: () {
                                                 context.go('/register');

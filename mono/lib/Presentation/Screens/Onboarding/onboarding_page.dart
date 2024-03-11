@@ -75,7 +75,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(AppStrings.already),
+                      const Text(
+                        AppStrings.already,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       TextButton(
                         child: const Text(
                           AppStrings.login,

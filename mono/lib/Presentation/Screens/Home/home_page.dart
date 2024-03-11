@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mono/Core/Constants/colors.dart';
+import 'package:mono/Presentation/Components/Cards/user_card.dart';
 
 import 'Tabs/home_tab.dart';
 
@@ -11,93 +12,107 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final tabController;
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 4, vsync: this);
+  int currentIndex = 0;
+  void changePage(int index) {
+    if (currentIndex == index) {
+      return;
+    }
+    currentIndex = index;
+    setState(() {});
+    print(currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: InkWell(
-          child: Container(
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(color: AppColors.primaryColor, blurRadius: 15),
-            ], color: AppColors.primaryColor, shape: BoxShape.circle),
-            child: const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Icon(
-                Icons.add,
-                size: 36,
-                color: Colors.white,
-              ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: InkWell(
+        child: Container(
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(color: AppColors.primaryColor, blurRadius: 15),
+          ], color: AppColors.primaryColor, shape: BoxShape.circle),
+          child: const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Icon(
+              Icons.add,
+              size: 36,
+              color: Colors.white,
             ),
           ),
         ),
-        bottomNavigationBar: CustomBottomAppBar(
-          tabController: tabController,
-        ),
-        body: TabBarView(controller: tabController, children: [
-          const HomeTab(),
-          Container(),
-          Container(),
-          Container(),
-        ]));
-  }
-}
-
-class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar({
-    super.key,
-    required this.tabController,
-  });
-
-  final TabController tabController;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
+      ),
+      bottomNavigationBar: BottomAppBar(
       color: Colors.white,
       shadowColor: AppColors.primaryColor,
       notchMargin: 12,
       shape: const CircularNotchedRectangle(),
-      child: TabBar(
-          labelColor: AppColors.primaryColor,
-          unselectedLabelColor: Colors.grey,
-          indicatorColor: Colors.transparent,
-          dividerColor: Colors.transparent,
-          controller: tabController,
-          tabs: const [
-            Tab(
-              icon: Icon(
-                Icons.home_filled,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  changePage(0);
+                },
+                icon: const Icon(
+                  Icons.home_filled,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 30.0),
-              child: Tab(
-                icon: Icon(
+              sizedBoxW(20),
+              IconButton(
+                onPressed: () {
+                  changePage(1);
+                },
+                icon: const Icon(
                   Icons.bar_chart_rounded,
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Tab(
-                icon: Icon(
+            ],
+          ),
+          sizedBoxW(50),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  changePage(2);
+                },
+                icon: const Icon(
                   Icons.account_balance_wallet,
                 ),
               ),
-            ),
-            Tab(
-              icon: Icon(
-                Icons.person,
+              sizedBoxW(20),
+              IconButton(
+                onPressed: () {
+                  changePage(3);
+                },
+                icon: const Icon(
+                  Icons.person,
+                ),
               ),
-            ),
-          ]),
+            ],
+          )
+        ]),
+      ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: [
+          const HomeTab(),
+          Container(
+            color: Colors.red,
+            height: 200,
+            width: 200,
+          ),
+          Container(
+            color: Colors.green,
+            height: 200,
+            width: 200,
+          ),
+          Container(
+            color: Colors.blue,
+            height: 200,
+            width: 200,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -63,7 +63,7 @@ class HomeTab extends StatelessWidget {
         ),
         Container(
           decoration:
-              BoxDecoration(color: Colors.transparent.withOpacity(0.04), borderRadius: BorderRadius.circular(8)),
+              BoxDecoration(color: Colors.white.withOpacity(0.04), borderRadius: BorderRadius.circular(8)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(IconPath.notification.toPathSvg()),

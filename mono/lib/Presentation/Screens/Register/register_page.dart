@@ -39,9 +39,12 @@ class RegisterPage extends ConsumerWidget {
                           children: [
                             Text(
                               "Register",
-                              style: TextStyle(fontSize: 32),
+                              style: TextStyle(fontSize: 32, color: Colors.black),
                             ),
-                            Text("Please register to continue"),
+                            Text(
+                              "Please register to continue",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ],
                         ),
                       ),
@@ -85,7 +88,10 @@ class RegisterPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        const Text('Email Address'),
+                                        const Text(
+                                          'Email Address',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         CustomField(
                                           controller: _emailController,
                                           hintText: "email@gmail.com",
@@ -101,7 +107,10 @@ class RegisterPage extends ConsumerWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        const Text('Password'),
+                                        const Text(
+                                          'Password',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         CustomField(
                                           controller: _passwordController,
                                           hintText: "*******",
@@ -115,7 +124,10 @@ class RegisterPage extends ConsumerWidget {
                                       children: [
                                         Checkbox(
                                             activeColor: AppColors.primaryColor, value: true, onChanged: (value) {}),
-                                        const Text("Remember me"),
+                                        const Text(
+                                          "Remember me",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         const Spacer(),
                                         TextButton(onPressed: () {}, child: const Text("Forget Password"))
                                       ],
@@ -144,7 +156,10 @@ class RegisterPage extends ConsumerWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Text("Do you have an account?"),
+                                          const Text(
+                                            "Do you have an account?",
+                                            style: TextStyle(color: Colors.black),
+                                          ),
                                           TextButton(
                                               onPressed: () async {
                                                 context.go('/login');

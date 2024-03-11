@@ -20,10 +20,12 @@ class CustomField extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, bottom: 4),
             child: TextField(
+              style: const TextStyle(color: Colors.black),
               controller: controller,
               cursorColor: AppColors.primaryColor,
               decoration: InputDecoration(
                   border: InputBorder.none,
+
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14)),
             ),

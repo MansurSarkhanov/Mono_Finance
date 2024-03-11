@@ -16,20 +16,22 @@ class UserCard extends StatelessWidget {
           color: const Color(
             0xFF2F7E79,
           ),
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(24)),
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Total Balance"),
-                    Text(
+                    const Text("Total Balance"),
+                    sizedBoxH(8),
+                    const Text(
                       "\$2,548.00",
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                     )
@@ -48,13 +50,13 @@ class UserCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
-             
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Container(
                           decoration:
-                              BoxDecoration(shape: BoxShape.circle, color: Colors.transparent.withOpacity(0.05)),
+                              BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: SvgPicture.asset(IconPath.arrowdown.toPathSvg()),
@@ -69,7 +71,7 @@ class UserCard extends StatelessWidget {
                     ),
                     sizedBoxH(8),
                     const Text(
-                      "\$ 1,840.00",
+                      " \$ 0",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
@@ -80,7 +82,7 @@ class UserCard extends StatelessWidget {
                       children: [
                         Container(
                           decoration:
-                              BoxDecoration(shape: BoxShape.circle, color: Colors.transparent.withOpacity(0.05)),
+                              BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: SvgPicture.asset(IconPath.arrowup.toPathSvg()),
@@ -95,7 +97,7 @@ class UserCard extends StatelessWidget {
                     ),
                     sizedBoxH(8),
                     const Text(
-                      "\$ 1,840.00",
+                      " \$ 0",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
