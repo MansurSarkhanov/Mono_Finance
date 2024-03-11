@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
-import 'package:mono/Presentation/Animations/page_route.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
-import 'package:mono/Presentation/Screens/Login/login_page.dart';
 import 'package:mono/Riverpod/auth_provider.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
-import '../Home/home_page.dart';
 
 class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
@@ -73,7 +71,6 @@ class RegisterPage extends ConsumerWidget {
                                       children: [
                                         const Text('Username'),
                                         CustomField(
-                                          
                                           controller: _usernameController,
                                           hintText: "Jhon Harry",
                                         ),
@@ -91,7 +88,6 @@ class RegisterPage extends ConsumerWidget {
                                         const Text('Email Address'),
                                         CustomField(
                                           controller: _emailController,
-
                                           hintText: "email@gmail.com",
                                         ),
                                       ],
@@ -136,7 +132,6 @@ class RegisterPage extends ConsumerWidget {
                                                   email: _emailController.text,
                                                   password: _passwordController.text,
                                                   username: _usernameController.text);
-                                              createPageRoute(context, const HomePage());
                                             },
                                             error: (error, stackTrace) => Text(error.toString()),
                                             loading: () => const CircularProgressIndicator(),
@@ -151,10 +146,8 @@ class RegisterPage extends ConsumerWidget {
                                           const Text("Do you have an account?"),
                                           TextButton(
                                               onPressed: () async {
-                                                createPageRoute(context, LoginPage());
-
+                                                context.go('/login');
                                                 FocusManager.instance.primaryFocus?.unfocus();
-
                                               },
                                               child: const Text("Sign In"))
                                         ],

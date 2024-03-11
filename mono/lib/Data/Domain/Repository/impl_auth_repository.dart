@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mono/Core/Contractors/auth_repository.dart';
-import 'package:mono/Core/Hive/hive_boxs_manager.dart';
-import 'package:mono/Data/auth_data_source.dart';
-import 'package:mono/Models/user_model.dart';
-import 'package:mono/Utility/Referances/firebase_collection_referance.dart';
+import 'package:mono/Core/Utility/Referances/firebase_collection_referance.dart';
+import 'package:mono/Data/Domain/Contractors/auth_repository.dart';
+import 'package:mono/Data/Models/user_model.dart';
+import 'package:mono/Data/Sources/auth_data_source.dart';
+import 'package:mono/Hive/hive_boxs_manager.dart';
 
-import '../DI/injection.dart';
+import '../../../injection.dart';
 
 class ImplAuthRepository implements IAuthRepository {
   final _firebaseRef = FirebaseCollectionReferance.users.ref;
@@ -69,7 +69,7 @@ class ImplAuthRepository implements IAuthRepository {
     final isAuth = await _cacheManager.readDataBool(boxName: 'auth', key: 'logged');
     if (isAuth == true) {
       return true;
-    } 
+    }
     return false;
   }
 }

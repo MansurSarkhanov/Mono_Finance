@@ -5,5 +5,6 @@ void createPageRoute(context, Widget child) {
     pageBuilder: (_, __, ___) => child,
     transitionDuration: const Duration(seconds: 2),
     transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-  ));
+    ),
+  );
 }

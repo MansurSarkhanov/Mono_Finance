@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/Path/image_path.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Constants/strings.dart';
+import 'package:mono/Core/Utility/Extensions/image_path_extension.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
-import 'package:mono/Presentation/Animations/page_route.dart';
-import 'package:mono/Presentation/Screens/Login/login_page.dart';
-import 'package:mono/Utility/Extensions/image_path_extension.dart';
 
 import '../../Components/Buttons/started_button.dart';
 
@@ -83,7 +82,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           style: TextStyle(color: AppColors.primaryColor),
                         ),
                         onPressed: () {
-                          createPageRoute(context, LoginPage());
+                          context.go('/login');
                         },
                       ),
                     ],

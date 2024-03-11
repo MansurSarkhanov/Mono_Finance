@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
-import 'package:mono/Presentation/Animations/page_route.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
-import 'package:mono/Presentation/Screens/Home/home_page.dart';
-import 'package:mono/Presentation/Screens/Register/register_page.dart';
 import 'package:mono/Riverpod/auth_provider.dart';
 
 import '../../Components/Inputs/custom_field.dart';
@@ -126,7 +124,6 @@ class LoginPage extends ConsumerWidget {
                                           loginProvider.value?.loginUserWithEmail(
                                               email: _emailController.text, password: _passwordController.text);
                                           FocusManager.instance.primaryFocus?.unfocus();
-                                          createPageRoute(context, const HomePage());
                                         },
                                       )),
                                   BounceFromBottomAnimation(
@@ -137,7 +134,7 @@ class LoginPage extends ConsumerWidget {
                                           const Text("Don't have an account?"),
                                           TextButton(
                                               onPressed: () {
-                                                createPageRoute(context, RegisterPage());
+                                                context.go('/register');
                                               },
                                               child: const Text("Sign up"))
                                         ],

@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mono/Core/DI/injection.dart';
-import 'package:mono/Presentation/Screens/Splash/splash_page.dart';
+import 'package:mono/app_routes.dart';
+import 'package:mono/injection.dart';
 
 import 'firebase_options.dart';
 
@@ -27,14 +27,15 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(
         textTheme: GoogleFonts.ubuntuTextTheme(),
         useMaterial3: true,
       ),
-      home: const SplashPage(),
+     
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mono/Presentation/Animations/page_route.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mono/Presentation/Components/Buttons/primary_button.dart';
-import 'package:mono/Presentation/Screens/Register/register_page.dart';
 
 import '../../../Core/Constants/strings.dart';
 
@@ -16,7 +15,7 @@ class StartedButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24),
       child: PrimaryButton(
         onPress: () {
-          createPageRoute(context, RegisterPage());
+          context.go('/register');
         },
         child: const Center(
             child: Text(
