@@ -80,7 +80,9 @@ class HomePage extends ConsumerWidget {
           controller: pageController,
           children: [
             const StatisticView(),
+
             HomeView(data: data),
+
             
             Container(
               color: Colors.green,

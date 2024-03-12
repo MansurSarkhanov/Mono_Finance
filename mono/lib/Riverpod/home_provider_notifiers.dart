@@ -8,6 +8,7 @@ final homeStateProvider = ChangeNotifierProvider<HomeStateNotifier>((ref) {
 });
 
 class HomeStateNotifier extends ChangeNotifier {
+  List<String> items = ['Day', ' Week', "Month", "Year"];
   UserModel userModel = UserModel();
   final _homeState = ImpleHomeRepository();
   Future<void> fetchUserInfo() async {

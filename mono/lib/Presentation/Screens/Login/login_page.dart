@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -136,21 +137,19 @@ class LoginPage extends ConsumerWidget {
                                           final result = await loginProvider.value?.loginUserWithEmail(
                                               email: _emailController.text, password: _passwordController.text);
                                           if (result != null) {
-                                            print('User Result');
-
                                             if (result.isSuccess()) {
                                               context.go('/home');
                                             } else if (result.isError()) {
-                                              print('object');
                                               final errorResult = result.tryGetError();
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text(errorResult!.message),
-                                                  );
-                                                },
-                                              );
+                                              Flushbar(
+                                                backgroundColor: AppColors.primaryColor,
+                                                margin: const EdgeInsets.all(24),
+                                                borderRadius: BorderRadius.circular(20),
+                                                duration: const Duration(seconds: 2),
+                                                flushbarPosition: FlushbarPosition.TOP,
+                                                title: "Auth Error",
+                                                message: errorResult!.message,
+                                              ).show(context);
                                             }
                                           }
 

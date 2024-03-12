@@ -14,4 +14,8 @@ class HiveBoxsManager {
     var box = await Hive.openBox(boxName);
     return box.get(key);
   }
+  Future<void> deleteData({required String boxName, required String key}) async {
+    var box = await Hive.openBox(boxName);
+    return box.delete(key);
+  }
 }
