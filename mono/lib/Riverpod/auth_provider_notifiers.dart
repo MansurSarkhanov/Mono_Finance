@@ -12,9 +12,9 @@ final checkProvider = StateNotifierProvider((ref) {
 
 class CheckStateNotifier extends StateNotifier<bool?> {
   CheckStateNotifier() : super(false);
-  final authState = ImplAuthRepository();
+  final _authState = ImplAuthRepository();
   Future<bool?> checkAuth() async {
-    state = await authState.checkAuth();
+    state = await _authState.checkAuth();
     return state;
   }
 }

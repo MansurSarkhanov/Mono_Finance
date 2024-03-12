@@ -4,8 +4,10 @@ import 'package:mono/Data/Domain/Contractors/auth_repository.dart';
 import 'package:mono/Data/Models/user_model.dart';
 import 'package:mono/Data/Sources/auth_data_source.dart';
 import 'package:mono/Hive/hive_boxs_manager.dart';
+import 'package:multiple_result/multiple_result.dart';
 
 import '../../../injection.dart';
+import '../../Models/failure_auth_model.dart';
 
 class ImplAuthRepository implements IAuthRepository {
   final _firebaseRef = FirebaseCollectionReferance.users.ref;
@@ -13,7 +15,8 @@ class ImplAuthRepository implements IAuthRepository {
   final _cacheManager = getIt.get<HiveBoxsManager>();
 
   @override
-  Future<User?> createUserWithEmail({required String email, required String password, required String username}) async {
+  Future<Result<User, FailureAuthModel>?> createUserWithEmail(
+      {required String email, required String password, required String username}) async {
     try {
       final createUser = await _authDataSource.createUserWithEmail(email: email, password: password);
       if (createUser != null) {
@@ -29,38 +32,38 @@ class ImplAuthRepository implements IAuthRepository {
         _cacheManager.saveData(boxName: "auth", key: 'token', value: createUser.uid);
         _cacheManager.saveData(boxName: "auth", key: 'logged', value: true);
 
-        return createUser;
+        return Success(createUser);
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      if (e.code == 'user-not-found') {
+        return Error(FailureAuthModel(message: e.toString()));
+      } else if (e.code == 'wrong-password') {
+        return Error(FailureAuthModel(message: e.toString()));
       }
     } catch (e) {
-      print(e);
+      return Error(FailureAuthModel(message: e.toString()));
     }
-    return null;
+    return Error(FailureAuthModel(message: "Check your email and password"));
   }
 
   @override
-  Future<User?> loginUserWithEmail({required String email, required String password}) async {
+  Future<Result<User, FailureAuthModel>?> loginUserWithEmail({required String email, required String password}) async {
     try {
       final createUser = await _authDataSource.loginUserWithEmail(email: email, password: password);
       _cacheManager.saveData(boxName: "auth", key: 'token', value: createUser?.uid);
       _cacheManager.saveData(boxName: "auth", key: 'logged', value: true);
 
-      return createUser;
+      return Success(createUser!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        return Error(FailureAuthModel(message: e.toString()));
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        return Error(FailureAuthModel(message: e.toString()));
       }
     } catch (e) {
-      print(e);
+      return Error(FailureAuthModel(message: e.toString()));
     }
-    return null;
+    return Error(FailureAuthModel(message: "Check your email and password"));
   }
 
   @override

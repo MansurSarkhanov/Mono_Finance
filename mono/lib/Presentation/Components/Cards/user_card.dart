@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/Path/icon_path.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
+import 'package:mono/Data/Models/user_model.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
     super.key,
+    required this.userModel,
   });
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,9 @@ class UserCard extends StatelessWidget {
                   children: [
                     const Text("Total Balance"),
                     sizedBoxH(8),
-                    const Text(
-                      "\$2,548.00",
-                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    Text(
+                      "\$ ${userModel.money}",
+                      style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
@@ -55,8 +58,7 @@ class UserCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          decoration:
-                              BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: SvgPicture.asset(IconPath.arrowdown.toPathSvg()),
@@ -70,9 +72,9 @@ class UserCard extends StatelessWidget {
                       ],
                     ),
                     sizedBoxH(8),
-                    const Text(
-                      " \$ 0",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      " \$ ${userModel.income}",
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
@@ -81,8 +83,7 @@ class UserCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          decoration:
-                              BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.04)),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: SvgPicture.asset(IconPath.arrowup.toPathSvg()),
@@ -96,9 +97,9 @@ class UserCard extends StatelessWidget {
                       ],
                     ),
                     sizedBoxH(8),
-                    const Text(
-                      " \$ 0",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      " \$ ${userModel.expenses}",
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
                 )
@@ -109,8 +110,6 @@ class UserCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 SizedBox sizedBoxH(double height) {

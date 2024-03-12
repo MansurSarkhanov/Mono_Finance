@@ -27,7 +27,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/home',
-        pageBuilder: (context, state) => createPageRoute(context, state: state, child: const HomePage())
+        pageBuilder: (context, state) => createPageRoute(context, state: state, child: HomePage())
 
     ),
   ],

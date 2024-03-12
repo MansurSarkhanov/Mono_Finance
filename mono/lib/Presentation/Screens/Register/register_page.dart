@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
-import 'package:mono/Riverpod/auth_provider.dart';
+import 'package:mono/Riverpod/auth_provider_notifiers.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';

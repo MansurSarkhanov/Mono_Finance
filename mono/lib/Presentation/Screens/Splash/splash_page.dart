@@ -6,7 +6,7 @@ import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
 import 'package:mono/Presentation/Screens/Home/home_page.dart';
 import 'package:mono/Presentation/Screens/Onboarding/onboarding_page.dart';
-import 'package:mono/Riverpod/auth_provider.dart';
+import 'package:mono/Riverpod/auth_provider_notifiers.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});
@@ -21,7 +21,7 @@ class SplashPage extends ConsumerWidget {
             print(snapshot.data);
             if (snapshot.hasData) {
               if (snapshot.data == true) {
-                return const HomePage();
+                return HomePage();
               }
               else if (snapshot.data == false) {
                 return const OnboardingPage();

@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:multiple_result/multiple_result.dart';
 
-abstract class IAuthRepository {
-  Future<User?> createUserWithEmail(
+import '../../Models/failure_auth_model.dart';
+
+abstract interface class IAuthRepository {
+  Future<Result<User, FailureAuthModel>?> createUserWithEmail(
       {required String email, required String password, required String username});
 
-  Future<User?> loginUserWithEmail({required String email, required String password});
+  Future<Result<User, FailureAuthModel>?> loginUserWithEmail({required String email, required String password});
   Future<bool?> checkAuth();
 
 }

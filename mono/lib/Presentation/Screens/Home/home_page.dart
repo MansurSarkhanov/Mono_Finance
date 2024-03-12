@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/colors.dart';
+import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
+import 'package:mono/Core/Utility/Extensions/image_path_extension.dart';
 import 'package:mono/Presentation/Components/Cards/user_card.dart';
 
-import 'Tabs/home_tab.dart';
+import '../../../Core/Constants/Path/icon_path.dart';
+import '../../../Core/Constants/Path/image_path.dart';
+import '../../../Riverpod/home_provider_notifiers.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class HomePage extends ConsumerWidget {
+  HomePage({super.key});
   int currentIndex = 0;
   void changePage(int index) {
     if (currentIndex == index) {
       return;
     }
     currentIndex = index;
-    setState(() {});
     print(currentIndex);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: InkWell(
@@ -42,10 +41,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-      color: Colors.white,
-      shadowColor: AppColors.primaryColor,
-      notchMargin: 12,
-      shape: const CircularNotchedRectangle(),
+        color: Colors.white,
+        shadowColor: AppColors.primaryColor,
+        notchMargin: 12,
+        shape: const CircularNotchedRectangle(),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Row(
             children: [
@@ -92,27 +91,84 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           )
         ]),
       ),
-      body: IndexedStack(
-        index: currentIndex,
-        children: [
-          const HomeTab(),
-          Container(
-            color: Colors.red,
-            height: 200,
-            width: 200,
-          ),
-          Container(
-            color: Colors.green,
-            height: 200,
-            width: 200,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 200,
-            width: 200,
-          ),
-        ],
-      ),
+      body: Consumer(builder: (context, ref, child) {
+        ref.read(homeStateProvider.notifier).fetchUserInfo();
+        final userModel = ref.watch(homeStateProvider.notifier).state;
+        return IndexedStack(
+          index: currentIndex,
+          children: [
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    Expanded(
+                        child: SvgPicture.asset(
+                      ImagePath.card.toPathSvg(),
+                      fit: BoxFit.fill,
+                    )),
+                    Expanded(
+                      flex: 2,
+                      child: Container(),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 24.0, right: 24, top: 60),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Good afternoon,'),
+                              Text(
+                                userModel.username ?? 'Test',
+                                style: const TextStyle(fontSize: 20),
+                              )
+                            ],
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.04), borderRadius: BorderRadius.circular(8)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset(IconPath.notification.toPathSvg()),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      UserCard(
+                        userModel: userModel,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Container(
+              color: Colors.red,
+              height: 200,
+              width: 200,
+            ),
+            Container(
+              color: Colors.green,
+              height: 200,
+              width: 200,
+            ),
+            Container(
+              color: Colors.blue,
+              height: 200,
+              width: 200,
+            ),
+          ],
+        );
+      }),
     );
   }
 }

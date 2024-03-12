@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
 import 'package:mono/Presentation/Components/Buttons/login_button.dart';
-import 'package:mono/Riverpod/auth_provider.dart';
+import 'package:mono/Riverpod/auth_provider_notifiers.dart';
 
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
@@ -132,11 +132,28 @@ class LoginPage extends ConsumerWidget {
                                       delay: 3,
                                       child: AuthButton(
                                         title: "Login",
-                                        onPress: () {
-                                          loginProvider.value?.loginUserWithEmail(
+                                        onPress: () async {
+                                          final result = await loginProvider.value?.loginUserWithEmail(
                                               email: _emailController.text, password: _passwordController.text);
+                                          if (result != null) {
+                                            print('User Result');
 
-                                          context.go('/home');
+                                            if (result.isSuccess()) {
+                                              context.go('/home');
+                                            } else if (result.isError()) {
+                                              print('object');
+                                              final errorResult = result.tryGetError();
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: Text(errorResult!.message),
+                                                  );
+                                                },
+                                              );
+                                            }
+                                          }
+
                                           FocusManager.instance.primaryFocus?.unfocus();
                                         },
                                       )),
