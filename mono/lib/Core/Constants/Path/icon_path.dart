@@ -1,1 +1,11 @@
-enum IconPath { mono, arrowdown, arrowup, network, notification, home, profile, wallet }
+enum IconPath {
+  mono,
+  arrowdown,
+  arrowup,
+  network,
+  notification,
+  home,
+  profile,
+  wallet,
+  download,
+}
