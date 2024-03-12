@@ -5,6 +5,7 @@ import 'package:mono/Core/Constants/Path/icon_path.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
 import 'package:mono/Presentation/Components/Cards/user_card.dart';
+import 'package:mono/Presentation/Screens/Home/Widgets/line_chart.dart';
 import 'package:mono/Riverpod/home_provider_notifiers.dart';
 
 class StatisticView extends StatelessWidget {
@@ -47,7 +48,9 @@ class StatisticView extends StatelessWidget {
                             ),
                           ),
                         ))
-                    .toList())
+                    .toList()),
+            sizedBoxH(40),
+            const LineChartSample2()
           ],
         ),
       );
