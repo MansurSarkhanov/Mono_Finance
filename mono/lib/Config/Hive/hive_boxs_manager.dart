@@ -1,6 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HiveBoxsManager {
+class HiveConfigManager {
+  static final HiveConfigManager _config = HiveConfigManager();
+  static HiveConfigManager get config => _config;
+  Future<void> init() async {
+    await Hive.initFlutter();
+  }
+
   Future<void> saveData({required String boxName, required String key, required value}) async {
     var box = await Hive.openBox(boxName);
     box.put(key, value);

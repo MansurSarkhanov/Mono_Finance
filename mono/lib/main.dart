@@ -1,21 +1,17 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mono/Config/Hive/hive_boxs_manager.dart';
 import 'package:mono/app_routes.dart';
 import 'package:mono/injection.dart';
 
-import 'firebase_options.dart';
+import 'Config/App/app_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUp();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await Hive.initFlutter();
+  await AppConfig.config.init();
+  await HiveConfigManager.config.init();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -24,9 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ));
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,

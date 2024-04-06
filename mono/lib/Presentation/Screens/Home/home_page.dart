@@ -10,7 +10,8 @@ import 'Widgets/statistic_view.dart';
 class HomePage extends ConsumerWidget {
   HomePage({super.key});
 
-  final PageController pageController = PageController();
+  final PageController pageController = PageController(initialPage: 0);
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(homeStateProvider).fetchUserInfo();
@@ -32,58 +33,19 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shadowColor: AppColors.primaryColor,
-        notchMargin: 12,
-        shape: const CircularNotchedRectangle(),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.home_filled,
-                ),
-              ),
-              sizedBoxW(20),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.bar_chart_rounded,
-                ),
-              ),
-            ],
-          ),
-          sizedBoxW(50),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.account_balance_wallet,
-                ),
-              ),
-              sizedBoxW(20),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.person,
-                ),
-              ),
-            ],
-          )
-        ]),
-      ),
+          color: Colors.white,
+          shadowColor: AppColors.primaryColor,
+          notchMargin: 12,
+          shape: const CircularNotchedRectangle(),
+          child: _tabBar()),
       body: Consumer(builder: (context, state, child) {
         final data = state.watch(homeStateProvider);
         return PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           children: [
-            const StatisticView(),
-
             HomeView(data: data),
-
-            
+            const StatisticView(),
             Container(
               color: Colors.green,
               height: 200,
@@ -97,6 +59,71 @@ class HomePage extends ConsumerWidget {
           ],
         );
       }),
+    );
+  }
+
+  Widget _tabBar() {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Row(
+        children: [
+          buildTab(
+            onPress: () {
+              selectedIndex = 0;
+              print(selectedIndex);
+
+              pageController.jumpToPage(selectedIndex);
+            },
+            icon: Icons.home_filled,
+            index: 0,
+          ),
+          sizedBoxW(30),
+          buildTab(
+            onPress: () {
+              selectedIndex = 1;
+              print(selectedIndex);
+
+              pageController.jumpToPage(selectedIndex);
+            },
+            icon: Icons.bar_chart_rounded,
+            index: 1,
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          buildTab(
+            onPress: () {
+              selectedIndex = 2;
+              print(selectedIndex);
+              pageController.jumpToPage(selectedIndex);
+            },
+            icon: Icons.account_balance_wallet,
+            index: 2,
+          ),
+          sizedBoxW(30),
+          buildTab(
+            onPress: () {
+              selectedIndex = 3;
+              print(selectedIndex);
+
+              pageController.jumpToPage(selectedIndex);
+            },
+            icon: Icons.person,
+            index: 3,
+          ),
+        ],
+      )
+    ]);
+  }
+
+  Widget buildTab({required IconData icon, required int index, required onPress}) {
+    Color iconColor = index == selectedIndex ? AppColors.primaryColor : Colors.grey;
+    return IconButton(
+      onPressed: onPress,
+      icon: Icon(
+        icon,
+        color: iconColor,
+      ),
     );
   }
 }

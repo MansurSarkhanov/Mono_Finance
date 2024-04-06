@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mono/Config/Hive/hive_boxs_manager.dart';
 import 'package:mono/Core/Utility/Referances/firebase_collection_referance.dart';
 import 'package:mono/Data/Domain/Contractors/auth_repository.dart';
 import 'package:mono/Data/Models/user_model.dart';
 import 'package:mono/Data/Sources/auth_data_source.dart';
-import 'package:mono/Hive/hive_boxs_manager.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../../injection.dart';
@@ -12,7 +12,7 @@ import '../../Models/failure_auth_model.dart';
 class ImplAuthRepository implements IAuthRepository {
   final _firebaseRef = FirebaseCollectionReferance.users.ref;
   final _authDataSource = getIt.get<AuthDataSource>();
-  final _cacheManager = getIt.get<HiveBoxsManager>();
+  final _cacheManager = getIt.get<HiveConfigManager>();
 
   @override
   Future<Result<User, FailureAuthModel>?> createUserWithEmail(
