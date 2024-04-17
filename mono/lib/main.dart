@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mono',
       theme: ThemeData(
+        brightness: Brightness.light,
         textTheme: GoogleFonts.ubuntuTextTheme().apply(
           bodyColor: Colors.white,
           displayColor: Colors.white,

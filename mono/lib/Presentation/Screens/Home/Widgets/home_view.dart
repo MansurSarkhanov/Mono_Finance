@@ -66,7 +66,27 @@ class HomeView extends StatelessWidget {
               ),
               UserCard(
                 userModel: data.userModel,
-              )
+              ),
+              sizedBoxH(8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Transactions History',
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  TextButton(onPressed: () {}, child: const Text("See all"))
+                ],
+              ),
+              sizedBoxH(16),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return const ListTile();
+                  },
+                ),
+              ),
+              
             ],
           ),
         )
