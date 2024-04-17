@@ -78,11 +78,25 @@ class HomeView extends StatelessWidget {
                   TextButton(onPressed: () {}, child: const Text("See all"))
                 ],
               ),
-              sizedBoxH(16),
               Expanded(
                 child: ListView.builder(
+                  itemCount: 10,
+                  padding: EdgeInsets.zero,
                   itemBuilder: (context, index) {
-                    return const ListTile();
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Container(
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFF0F6F5), borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/mono-e4a22.appspot.com/o/youtube.png?alt=media&token=ac19deb6-6986-4ece-a65d-3f95bc816d54')),
+                      ),
+                      title: Text(data.currentFinance.title ?? 'sdfsfs'),
+                      subtitle: const Text("Test"),
+                      trailing: const Text("+ \$ 850.00"),
+                    );
                   },
                 ),
               ),

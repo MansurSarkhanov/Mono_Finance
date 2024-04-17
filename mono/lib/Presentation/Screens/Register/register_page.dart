@@ -9,14 +9,20 @@ import 'package:mono/Riverpod/auth_provider_notifiers.dart';
 import '../../Components/Inputs/custom_field.dart';
 import '../../Components/auth_background.dart';
 
-class RegisterPage extends ConsumerWidget {
-  RegisterPage({super.key});
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _usernameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+
+class RegisterPage extends ConsumerStatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends ConsumerState<RegisterPage> {
+  @override
+  Widget build(BuildContext context) {
     final authProvider = ref.watch(authProviderRef);
     return Scaffold(
       body: Stack(
@@ -144,7 +150,11 @@ class RegisterPage extends ConsumerWidget {
                                                   email: _emailController.text,
                                                   password: _passwordController.text,
                                                   username: _usernameController.text);
+                                              if (context.mounted) {
                                               context.go('/home');
+                                                    
+                                              }
+
                                             },
                                             error: (error, stackTrace) => Text(error.toString()),
                                             loading: () => const CircularProgressIndicator(),

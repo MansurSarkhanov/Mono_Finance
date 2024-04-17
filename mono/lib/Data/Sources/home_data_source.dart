@@ -1,16 +1,18 @@
 import 'package:mono/Config/Hive/hive_boxs_manager.dart';
+import 'package:mono/Data/Models/finance_model.dart';
 import 'package:mono/Data/Models/user_model.dart';
 
 import '../../Core/Utility/Referances/firebase_collection_referance.dart';
 import '../../injection.dart';
 
 final class HomeDataSource {
-  final _firebaseCollection = FirebaseCollectionReferance.users;
   final _hiveManager = getIt.get<HiveConfigManager>();
 
   Future<UserModel?> fetcUserInfo() async {
+    const firebaseCollection = FirebaseCollectionReferance.users;
+
     final userToken = await _hiveManager.readDataString(boxName: 'auth', key: 'token');
-    final response = _firebaseCollection.ref
+    final response = firebaseCollection.ref
         .doc(userToken)
         .withConverter(
           fromFirestore: (snapshot, options) {
@@ -22,6 +24,25 @@ final class HomeDataSource {
         )
         .get()
         .then((value) => value.data());
+    return response;
+  }
+
+  Future<FinanceModel?> getUserFinance() async {
+    const firebaseCollection = FirebaseCollectionReferance.finances;
+    final userToken = await _hiveManager.readDataString(boxName: 'auth', key: 'token');
+    final response = firebaseCollection.ref
+        .doc(userToken)
+        .withConverter(
+          fromFirestore: (snapshot, options) {
+            return FinanceModel.fromJson(snapshot.data()!);
+          },
+          toFirestore: (value, options) {
+            return value.toJson();
+          },
+        )
+        .get()
+        .then((value) => value.data());
+    print(response);
     return response;
   }
 }
