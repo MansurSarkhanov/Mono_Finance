@@ -91,7 +91,11 @@ class HomeView extends StatelessWidget {
                         child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/mono-e4a22.appspot.com/o/youtube.png?alt=media&token=ac19deb6-6986-4ece-a65d-3f95bc816d54')),
+                              data.currentFinance.data?[index].image ??
+                                  'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+                              width: 40,
+                              height: 50,
+                            )),
                       ),
                       title: Text(
                         data.currentFinance.data?[index].title ?? 'sdfsfs',
