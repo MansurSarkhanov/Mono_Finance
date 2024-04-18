@@ -73,7 +73,7 @@ class UserCard extends StatelessWidget {
                     ),
                     sizedBoxH(8),
                     Text(
-                      " \$ ${userModel.income}",
+                      " \$ ${userModel.income?.toDouble()}",
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
@@ -99,7 +99,7 @@ class UserCard extends StatelessWidget {
                     ),
                     sizedBoxH(8),
                     Text(
-                      " \$ ${userModel.expenses}",
+                      " \$ ${userModel.expenses?.toDouble()}",
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],

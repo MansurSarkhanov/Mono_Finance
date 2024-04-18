@@ -29,7 +29,7 @@ class FinanceData {
   String? title;
   String? subtitle;
   bool? isExpense;
-  String? price;
+  int? price;
   String? id;
 
   FinanceData({this.image, this.title, this.subtitle, this.isExpense, this.price, this.id});

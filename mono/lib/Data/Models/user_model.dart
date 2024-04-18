@@ -3,8 +3,8 @@ class UserModel {
   String? password;
   String? username;
   String? money;
-  String? income;
-  String? expenses;
+  int? income;
+  int? expenses;
 
   UserModel({this.email, this.password, this.username, this.money, this.income, this.expenses});
 
@@ -14,7 +14,7 @@ class UserModel {
     username = json['username'];
     money = json['money'];
     income = json['income'];
-    expenses = json['expenses'];
+    expenses = json['expense'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +24,7 @@ class UserModel {
     data['username'] = username;
     data['money'] = money;
     data['income'] = income;
-    data['expenses'] = expenses;
+    data['expense'] = expenses;
     return data;
   }
 }

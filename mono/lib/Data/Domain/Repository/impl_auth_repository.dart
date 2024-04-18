@@ -24,8 +24,8 @@ class ImplAuthRepository implements IAuthRepository {
           email: email,
           password: password,
           username: username,
-          expenses: '0',
-          income: '0',
+          expenses: 0,
+          income: 0,
           money: '0',
         ).toJson();
         await _firebaseRef.doc(createUser.uid).set(userModel);

@@ -93,14 +93,22 @@ class HomeView extends StatelessWidget {
                             child: Image.network(
                                 'https://firebasestorage.googleapis.com/v0/b/mono-e4a22.appspot.com/o/youtube.png?alt=media&token=ac19deb6-6986-4ece-a65d-3f95bc816d54')),
                       ),
-                      title: Text(data.currentFinance.data?[index].title ?? 'sdfsfs'),
+                      title: Text(
+                        data.currentFinance.data?[index].title ?? 'sdfsfs',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Text(data.currentFinance.data?[index].subtitle ?? 'sdfsfs'),
-                      trailing: Text(data.currentFinance.data?[index].price ?? 'sdfsfs'),
+                      trailing: Text(
+                        " ${data.currentFinance.data?[index].isExpense ?? false ? "+" : "-"}\$ ${data.currentFinance.data?[index].price?.toDouble()}",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: (data.currentFinance.data?[index].isExpense ?? false) ? Colors.green : Colors.red),
+                      ),
                     );
                   },
                 ),
               ),
-              
             ],
           ),
         )
