@@ -80,7 +80,7 @@ class HomeView extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: data.currentFinance.data?.length,
                   padding: EdgeInsets.zero,
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -93,9 +93,9 @@ class HomeView extends StatelessWidget {
                             child: Image.network(
                                 'https://firebasestorage.googleapis.com/v0/b/mono-e4a22.appspot.com/o/youtube.png?alt=media&token=ac19deb6-6986-4ece-a65d-3f95bc816d54')),
                       ),
-                      title: Text(data.currentFinance.title ?? 'sdfsfs'),
-                      subtitle: const Text("Test"),
-                      trailing: const Text("+ \$ 850.00"),
+                      title: Text(data.currentFinance.data?[index].title ?? 'sdfsfs'),
+                      subtitle: Text(data.currentFinance.data?[index].subtitle ?? 'sdfsfs'),
+                      trailing: Text(data.currentFinance.data?[index].price ?? 'sdfsfs'),
                     );
                   },
                 ),

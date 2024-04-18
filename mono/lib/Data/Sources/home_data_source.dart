@@ -34,6 +34,7 @@ final class HomeDataSource {
         .doc(userToken)
         .withConverter(
           fromFirestore: (snapshot, options) {
+            print(snapshot.data());
             return FinanceModel.fromJson(snapshot.data()!);
           },
           toFirestore: (value, options) {
@@ -42,7 +43,6 @@ final class HomeDataSource {
         )
         .get()
         .then((value) => value.data());
-    print(response);
     return response;
   }
 }
