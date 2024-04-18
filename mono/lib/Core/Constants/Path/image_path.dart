@@ -4,7 +4,6 @@ enum ImagePath {
   men,
   onboarding,
   card,
-  upwork,
-  youtube,
-  paypal,
+  empty
+  
 }

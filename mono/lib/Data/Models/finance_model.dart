@@ -30,9 +30,8 @@ class FinanceData {
   String? subtitle;
   bool? isExpense;
   int? price;
-  String? id;
 
-  FinanceData({this.image, this.title, this.subtitle, this.isExpense, this.price, this.id});
+  FinanceData({this.image, this.title, this.subtitle, this.isExpense, this.price});
 
   FinanceData.fromJson(Map<String, dynamic> json) {
     image = json['image'];
@@ -40,7 +39,6 @@ class FinanceData {
     subtitle = json['subtitle'];
     isExpense = json['isExpense'];
     price = json['price'];
-    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -50,7 +48,6 @@ class FinanceData {
     data['subtitle'] = subtitle;
     data['isExpense'] = isExpense;
     data['price'] = price;
-    data['id'] = id;
     return data;
   }
 }

@@ -23,6 +23,7 @@ class ImpleHomeRepository implements IHomeRepository {
   Future<Result<FinanceModel?, bool>> getUserFinance() async {
     try {
       final response = await _homeDataSource.getUserFinance();
+      
       return Success(response);
     } catch (e) {
       const Error(true);

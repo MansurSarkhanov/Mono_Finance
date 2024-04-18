@@ -35,13 +35,17 @@ final class HomeDataSource {
         .withConverter(
           fromFirestore: (snapshot, options) {
             return FinanceModel.fromJson(snapshot.data()!);
+            
           },
           toFirestore: (value, options) {
             return value.toJson();
           },
         )
         .get()
-        .then((value) => value.data());
+        .then((value) {
+          value.data();
+        });
+      
     return response;
   }
 }
