@@ -2,7 +2,7 @@ class UserModel {
   String? email;
   String? password;
   String? username;
-  String? money;
+  int? money;
   int? income;
   int? expenses;
 

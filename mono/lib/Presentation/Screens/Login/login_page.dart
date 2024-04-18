@@ -14,13 +14,19 @@ final checkValue = StateProvider<bool>((ref) {
   return false;
 });
 
-class LoginPage extends ConsumerWidget {
-  LoginPage({super.key});
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     final loginProvider = ref.watch(authProviderRef);
 
     return Scaffold(
@@ -117,7 +123,7 @@ class LoginPage extends ConsumerWidget {
                                               activeColor: AppColors.primaryColor,
                                               value: isCheck,
                                               onChanged: (value) {
-                                                state.read(checkValue.state).state = value ?? false;
+                                                state.read(checkValue.notifier).state = value ?? false;
                                               });
                                         }),
                                         const Text(
@@ -138,10 +144,13 @@ class LoginPage extends ConsumerWidget {
                                               email: _emailController.text, password: _passwordController.text);
                                           if (result != null) {
                                             if (result.isSuccess()) {
-                                              context.go('/home');
+                                              if (context.mounted) {
+                                                context.go('/home');
+                                              }
                                             } else if (result.isError()) {
                                               final errorResult = result.tryGetError();
-                                              Flushbar(
+                                              if (context.mounted) {
+                                                Flushbar(
                                                 backgroundColor: AppColors.primaryColor,
                                                 margin: const EdgeInsets.all(24),
                                                 borderRadius: BorderRadius.circular(20),
@@ -150,6 +159,8 @@ class LoginPage extends ConsumerWidget {
                                                 title: "Auth Error",
                                                 message: errorResult!.message,
                                               ).show(context);
+                                              }
+                                             
                                             }
                                           }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
 import 'package:mono/Core/Utility/Extensions/image_path_extension.dart';
 
@@ -45,7 +46,11 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text('Good afternoon,'),
-                      Text(
+                      data.isUserLoading
+                          ? const CustomProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
                         data.userModel.username ?? 'Test',
                         style: const TextStyle(fontSize: 20),
                       )
@@ -65,7 +70,7 @@ class HomeView extends StatelessWidget {
                 height: 30,
               ),
               UserCard(
-                userModel: data.userModel,
+                data: data,
               ),
               sizedBoxH(8),
               Row(
@@ -79,44 +84,65 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: data.currentFinance.data?.length,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Container(
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFF0F6F5), borderRadius: BorderRadius.all(Radius.circular(8))),
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                              data.currentFinance.data?[index].image ??
-                                  'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-                              width: 40,
-                              height: 50,
-                            )),
+                child: data.isFinanceLoading
+                    ? const CustomProgressIndicator()
+                    : ListView.builder(
+                        itemCount: data.currentFinance.data?.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: Container(
+                              decoration: const BoxDecoration(
+                                  color: Color(0xFFF0F6F5), borderRadius: BorderRadius.all(Radius.circular(8))),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.network(
+                                    data.currentFinance.data?[index].image ??
+                                        'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+                                    width: 40,
+                                    height: 50,
+                                  )),
+                            ),
+                            title: Text(
+                              data.currentFinance.data?[index].title ?? 'sdfsfs',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(data.currentFinance.data?[index].subtitle ?? 'sdfsfs'),
+                            trailing: Text(
+                              " ${data.currentFinance.data?[index].isExpense ?? false ? "+" : "-"}\$ ${data.currentFinance.data?[index].price?.toDouble()}",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: (data.currentFinance.data?[index].isExpense ?? false)
+                                      ? Colors.green
+                                      : Colors.red),
+                            ),
+                          );
+                        },
                       ),
-                      title: Text(
-                        data.currentFinance.data?[index].title ?? 'sdfsfs',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(data.currentFinance.data?[index].subtitle ?? 'sdfsfs'),
-                      trailing: Text(
-                        " ${data.currentFinance.data?[index].isExpense ?? false ? "+" : "-"}\$ ${data.currentFinance.data?[index].price?.toDouble()}",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: (data.currentFinance.data?[index].isExpense ?? false) ? Colors.green : Colors.red),
-                      ),
-                    );
-                  },
-                ),
               ),
             ],
           ),
         )
       ],
+    );
+  }
+}
+
+class CustomProgressIndicator extends StatelessWidget {
+  const CustomProgressIndicator({
+    super.key,
+    this.color = AppColors.primaryColor,
+  });
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(
+        color: color,
+        strokeWidth: 2,
+      ),
     );
   }
 }

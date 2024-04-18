@@ -20,7 +20,7 @@ class BounceFromBottomAnimation extends StatefulWidget {
 
 
   @override
-  _BounceFromBottomAnimationState createState() => _BounceFromBottomAnimationState();
+  State<BounceFromBottomAnimation> createState() => _BounceFromBottomAnimationState();
 }
 
 class _BounceFromBottomAnimationState extends State<BounceFromBottomAnimation> with TickerProviderStateMixin {

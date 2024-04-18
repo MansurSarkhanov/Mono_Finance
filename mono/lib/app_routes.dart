@@ -18,16 +18,16 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/login',
-      pageBuilder: (context, state) => createPageRoute(context, state: state, child: LoginPage())
+        pageBuilder: (context, state) => createPageRoute(context, state: state, child: const LoginPage())
     ),
     GoRoute(
       path: '/register',
-        pageBuilder: (context, state) => createPageRoute(context, state: state, child: RegisterPage())
+        pageBuilder: (context, state) => createPageRoute(context, state: state, child: const RegisterPage())
 
     ),
     GoRoute(
       path: '/home',
-        pageBuilder: (context, state) => createPageRoute(context, state: state, child: HomePage())
+        pageBuilder: (context, state) => createPageRoute(context, state: state, child: const HomePage())
 
     ),
   ],

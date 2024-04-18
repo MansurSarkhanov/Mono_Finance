@@ -19,7 +19,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     ref.read(homeStateProvider).fetchUserInfo();
-    ref.read(homeStateProvider).getUserFinance();
+    ref.watch(homeStateProvider).getUserFinance();
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

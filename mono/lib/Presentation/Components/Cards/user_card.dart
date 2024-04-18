@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/Path/icon_path.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
-import 'package:mono/Data/Models/user_model.dart';
+import 'package:mono/Presentation/Screens/Home/Widgets/home_view.dart';
+
+import '../../../Riverpod/home_provider_notifiers.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
     super.key,
-    required this.userModel,
+    required this.data,
   });
-  final UserModel userModel;
+  final HomeStateNotifier data;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,12 @@ class UserCard extends StatelessWidget {
                   children: [
                     const Text("Total Balance"),
                     sizedBoxH(8),
-                    Text(
-                      "\$ ${userModel.money}",
+                    data.isUserLoading
+                        ? const CustomProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "\$ ${data.userModel.money}",
                       style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                     )
                   ],
@@ -72,8 +78,12 @@ class UserCard extends StatelessWidget {
                       ],
                     ),
                     sizedBoxH(8),
-                    Text(
-                      " \$ ${userModel.income?.toDouble()}",
+                    data.isUserLoading
+                        ? const CustomProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            " \$ ${data.userModel.income?.toDouble()}",
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
@@ -98,8 +108,12 @@ class UserCard extends StatelessWidget {
                       ],
                     ),
                     sizedBoxH(8),
-                    Text(
-                      " \$ ${userModel.expenses?.toDouble()}",
+                    data.isUserLoading
+                        ? const CustomProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            " \$ ${data.userModel.expenses?.toDouble()}",
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],

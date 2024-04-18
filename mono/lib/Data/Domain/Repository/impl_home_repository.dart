@@ -14,7 +14,7 @@ class ImpleHomeRepository implements IHomeRepository {
       final response = await _homeDataSource.fetcUserInfo();
       return Success(response);
     } catch (e) {
-      print(e.toString());
+      const Error(true);
     }
     return const Error(true);
   }
@@ -25,7 +25,7 @@ class ImpleHomeRepository implements IHomeRepository {
       final response = await _homeDataSource.getUserFinance();
       return Success(response);
     } catch (e) {
-      print(e.toString());
+      const Error(true);
     }
     return const Error(true);
   }
