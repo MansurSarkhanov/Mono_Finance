@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
 import 'package:mono/Core/Utility/Extensions/image_path_extension.dart';
+import 'package:mono/Core/Utility/Extensions/sting_extension.dart';
 
 import '../../../../Core/Constants/Path/icon_path.dart';
 import '../../../../Core/Constants/Path/image_path.dart';
@@ -51,7 +52,7 @@ class HomeView extends StatelessWidget {
                               color: Colors.white,
                             )
                           : Text(
-                        data.userModel.username ?? 'Test',
+                              data.userModel.username!.capitalize(),
                         style: const TextStyle(fontSize: 20),
                       )
                     ],
