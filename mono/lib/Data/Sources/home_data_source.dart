@@ -30,22 +30,15 @@ final class HomeDataSource {
   Future<FinanceModel?> getUserFinance() async {
     const firebaseCollection = FirebaseCollectionReferance.finances;
     final userToken = await _hiveManager.readDataString(boxName: 'auth', key: 'token');
-    final response = firebaseCollection.ref
-        .doc(userToken)
-        .withConverter(
-          fromFirestore: (snapshot, options) {
-            return FinanceModel.fromJson(snapshot.data()!);
-            
-          },
-          toFirestore: (value, options) {
-            return value.toJson();
-          },
-        )
-        .get()
-        .then((value) {
-          value.data();
-        });
-      
-    return response;
+    final response = await firebaseCollection.ref.doc(userToken).withConverter(
+      fromFirestore: (snapshot, options) {
+        return FinanceModel.fromJson(snapshot.data()!);
+      },
+      toFirestore: (value, options) {
+        return value.toJson();
+      },
+    ).get();
+
+    return response.data();
   }
 }

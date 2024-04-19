@@ -16,6 +16,7 @@ class HomeStateNotifier extends ChangeNotifier {
   FinanceModel? currentFinance;
   bool isFinanceLoading = true;
   bool isUserLoading = true;
+  bool isEmpty = false;
 
   Future<void> fetchUserInfo() async {
     final user = await _homeState.fetcUserInfo();
@@ -31,17 +32,18 @@ class HomeStateNotifier extends ChangeNotifier {
     final result = await _homeState.getUserFinance();
     if (result.isSuccess()) {
       final finance = result.tryGetSuccess();
-
-      if (finance != null) {
-        currentFinance = finance;
-        print('sdfsfsdf');
+      print(finance);
+      if (finance == null) {
         isFinanceLoading = false;
+        isEmpty = true;
         notifyListeners();
-      } else {
-        isFinanceLoading = false;
-        
+        return null;
       }
+
+      currentFinance = finance;
+      isFinanceLoading = false;
+      return true;
     }
-    return null;
+    return false;
   }
 }

@@ -35,120 +35,113 @@ class HomeView extends StatelessWidget {
             ),
           ],
         ),
-        FutureBuilder(
-            future: data.getUserFinance(),
-            builder: (context, snapsot) {
-              final financeData = snapsot.data;
-              return Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24, top: 60),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Good afternoon,'),
-                            data.isUserLoading
-                                ? const CustomProgressIndicator(
-                                    color: Colors.white,
-                                  )
-                                : Text(
-                                    data.userModel.username!.capitalize(),
-                                    style: const TextStyle(fontSize: 20),
-                                  )
-                          ],
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.04), borderRadius: BorderRadius.circular(8)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(IconPath.notification.toPathSvg()),
-                          ),
-                        )
-                      ],
+        Padding(
+          padding: const EdgeInsets.only(left: 24.0, right: 24, top: 60),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Good afternoon,'),
+                      data.isUserLoading
+                          ? const CustomProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              data.userModel.username!.capitalize(),
+                              style: const TextStyle(fontSize: 20),
+                            )
+                    ],
+                  ),
+                  Container(
+                    decoration:
+                        BoxDecoration(color: Colors.white.withOpacity(0.04), borderRadius: BorderRadius.circular(8)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(IconPath.notification.toPathSvg()),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    UserCard(
-                      data: data,
-                    ),
-                    sizedBoxH(8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Transactions History',
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        TextButton(onPressed: () {}, child: const Text("See all"))
-                      ],
-                    ),
-                    Expanded(
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              UserCard(
+                data: data,
+              ),
+              sizedBoxH(8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Transactions History',
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  TextButton(onPressed: () {}, child: const Text("See all"))
+                ],
+              ),
+            
+                  
+              Expanded(
                       child: data.isFinanceLoading
                           ? const CustomProgressIndicator()
-                          : financeData != null
-                              ? ListView.builder(
-                                  itemCount: data.currentFinance?.data?.length,
-                                  padding: EdgeInsets.zero,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      leading: Container(
-                                        decoration: const BoxDecoration(
-                                            color: Color(0xFFF0F6F5),
-                                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                                        child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.network(
-                                              data.currentFinance?.data?[index].image ??
-                                                  'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-                                              width: 40,
-                                              height: 50,
-                                            )),
-                                      ),
-                                      title: Text(
-                                        data.currentFinance?.data?[index].title ?? 'sdfsfs',
-                                        style: const TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                      subtitle: Text(data.currentFinance?.data?[index].subtitle ?? 'sdfsfs'),
-                                      trailing: Text(
-                                        " ${data.currentFinance?.data?[index].isExpense ?? false ? "+" : "-"}\$ ${data.currentFinance?.data?[index].price?.toDouble()}",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: (data.currentFinance?.data?[index].isExpense ?? false)
-                                                ? Colors.green
-                                                : Colors.red),
-                                      ),
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        ImagePath.empty.toPathSvg(),
-                                        width: 110,
-                                      ),
-                                      sizedBoxH(12),
-                                      const Text(
-                                        "Data not found",
-                                        style: TextStyle(color: Colors.black),
-                                      )
-                                    ],
-                                  ),
+                    : (data.isEmpty == false)
+                        ? ListView.builder(
+                            itemCount: data.currentFinance?.data?.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                leading: Container(
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xFFF0F6F5), borderRadius: BorderRadius.all(Radius.circular(8))),
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.network(
+                                        data.currentFinance?.data?[index].image ??
+                                            'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+                                        width: 40,
+                                        height: 50,
+                                      )),
                                 ),
-                    ),
-                  ],
-                ),
-              );
-            })
+                                title: Text(
+                                  data.currentFinance?.data?[index].title ?? 'sdfsfs',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(data.currentFinance?.data?[index].subtitle ?? 'sdfsfs'),
+                                trailing: Text(
+                                  " ${data.currentFinance?.data?[index].isExpense ?? false ? "+" : "-"}\$ ${data.currentFinance?.data?[index].price?.toDouble()}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: (data.currentFinance?.data?[index].isExpense ?? false)
+                                          ? Colors.green
+                                          : Colors.red),
+                                ),
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(ImagePath.empty.toPathSvg(), height: 110),
+                                sizedBoxH(12),
+                                const Text(
+                                  "Data is empty",
+                                  style: TextStyle(color: Colors.black),
+                                )
+                              ],
+                            ),
+                          ),
+              )
+            ],
+          ),
+        )
       ],
     );
   }
