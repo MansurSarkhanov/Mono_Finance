@@ -14,8 +14,9 @@ class PrimaryButton extends StatefulWidget {
 class _PrimaryButtonState extends State<PrimaryButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: widget.onPress,
+      
       child: Container(
         decoration: const BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 14, offset: Offset(1, 8), color: AppColors.primaryColor)],

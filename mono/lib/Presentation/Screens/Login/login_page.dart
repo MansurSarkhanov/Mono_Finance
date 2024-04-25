@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Presentation/Animations/bounce_animation.dart';
-import 'package:mono/Presentation/Components/Buttons/login_button.dart';
+import 'package:mono/Presentation/Components/Buttons/auth_button.dart';
 import 'package:mono/Riverpod/auth_provider_notifiers.dart';
 
 import '../../Components/Inputs/custom_field.dart';
@@ -138,7 +138,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   BounceFromBottomAnimation(
                                       delay: 3,
                                       child: AuthButton(
-                                        authProvider: loginProvider,
                                         title: "Login",
                                         onPress: () async {
                                           final result = await loginProvider.value?.loginUserWithEmail(

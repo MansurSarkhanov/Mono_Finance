@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mono/Presentation/Components/Buttons/primary_button.dart';
-import 'package:riverpod/riverpod.dart';
 
 class AuthButton extends StatelessWidget {
-  const AuthButton({super.key, required this.title, required this.onPress, required this.authProvider});
+  const AuthButton({super.key, required this.title, required this.onPress});
   final String title;
   final VoidCallback onPress;
-  final AsyncValue authProvider;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,17 +12,10 @@ class AuthButton extends StatelessWidget {
       child: PrimaryButton(
         onPress: onPress,
         child: Center(
-            child: authProvider.when(
-          data: (_) => Text(
+          child: Text(
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          loading: () => const CircularProgressIndicator(),
-          error: (error, stackTrace) => Text(
-            'Error: $error',
-            style: const TextStyle(fontSize: 20.0),
-          ),
-        )
          
         ),
       ),
