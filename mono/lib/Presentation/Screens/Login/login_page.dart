@@ -138,6 +138,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   BounceFromBottomAnimation(
                                       delay: 3,
                                       child: AuthButton(
+                                        authProvider: loginProvider,
                                         title: "Login",
                                         onPress: () async {
                                           final result = await loginProvider.value?.loginUserWithEmail(

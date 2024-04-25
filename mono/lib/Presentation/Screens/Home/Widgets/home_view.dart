@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mono/Core/Constants/colors.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
 import 'package:mono/Core/Utility/Extensions/image_path_extension.dart';
 import 'package:mono/Core/Utility/Extensions/sting_extension.dart';
@@ -9,6 +8,7 @@ import '../../../../Core/Constants/Path/icon_path.dart';
 import '../../../../Core/Constants/Path/image_path.dart';
 import '../../../../Riverpod/home_provider_notifiers.dart';
 import '../../../Components/Cards/user_card.dart';
+import '../../../Components/custom_progress.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -84,11 +84,9 @@ class HomeView extends StatelessWidget {
                   TextButton(onPressed: () {}, child: const Text("See all"))
                 ],
               ),
-            
-                  
               Expanded(
-                      child: data.isFinanceLoading
-                          ? const CustomProgressIndicator()
+                child: data.isFinanceLoading
+                    ? const CustomProgressIndicator()
                     : (data.isEmpty == false)
                         ? ListView.builder(
                             itemCount: data.currentFinance?.data?.length,
@@ -143,23 +141,6 @@ class HomeView extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class CustomProgressIndicator extends StatelessWidget {
-  const CustomProgressIndicator({
-    super.key,
-    this.color = AppColors.primaryColor,
-  });
-  final Color? color;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(
-        color: color,
-        strokeWidth: 2,
-      ),
     );
   }
 }

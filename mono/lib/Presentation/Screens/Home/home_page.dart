@@ -5,6 +5,7 @@ import 'package:mono/Core/Constants/colors.dart';
 import '../../../Riverpod/home_provider_notifiers.dart';
 import '../../Components/bottom_navbar.dart';
 import 'Widgets/home_view.dart';
+import 'Widgets/profile_view.dart';
 import 'Widgets/statistic_view.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -23,7 +24,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: InkWell(
+      floatingActionButton: ref.watch(homeStateProvider).selectedIndex == 0
+          ? InkWell(
         child: Container(
           decoration: const BoxDecoration(
             boxShadow: [
@@ -44,7 +46,8 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
         ),
-      ),
+            )
+          : const SizedBox.shrink(),
       bottomNavigationBar: BottomNavBar(
         controller: pageController,
       ),
@@ -54,18 +57,16 @@ class _HomePageState extends ConsumerState<HomePage> {
           physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           children: [
-            HomeView(data: data),
+            HomeView(
+              data: data,
+            ),
             const StatisticView(),
             Container(
               color: Colors.green,
               height: 200,
               width: 200,
             ),
-            Container(
-              color: Colors.blue,
-              height: 200,
-              width: 200,
-            ),
+            const ProfileView()
           ],
         );
       }),

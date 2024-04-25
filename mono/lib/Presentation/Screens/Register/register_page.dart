@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -142,25 +143,39 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                   BounceFromBottomAnimation(
                                       delay: 3,
                                       child: AuthButton(
+                                      authProvider: authProvider,
                                         title: "Register",
-                                        onPress: () {
-                                          authProvider.when(
-                                            data: (data) async {
-                                              await data.createUserWithEmail(
-                                                  email: _emailController.text,
-                                                  password: _passwordController.text,
-                                                  username: _usernameController.text);
+                                      onPress: () async {
+                                        final result = await authProvider.value?.createUserWithEmail(
+                                            username: _usernameController.text,
+                                            email: _emailController.text,
+                                            password: _passwordController.text);
+                                        if (result != null) {
+                                          if (result.isSuccess()) {
                                               if (context.mounted) {
                                               context.go('/home');
-                                                    
-                                              }
+                                            }
+                                          } else if (result.isError()) {
+                                            final errorResult = result.tryGetError();
+                                            if (context.mounted) {
+                                              Flushbar(
+                                                backgroundColor: AppColors.primaryColor,
+                                                margin: const EdgeInsets.all(24),
+                                                borderRadius: BorderRadius.circular(20),
+                                                duration: const Duration(seconds: 2),
+                                                flushbarPosition: FlushbarPosition.TOP,
+                                                title: "Auth Error",
+                                                message: errorResult!.message,
+                                              ).show(context);
+                                            }
+                                             
+                                          }
+                                        }
 
+                                        FocusManager.instance.primaryFocus?.unfocus();
                                             },
-                                            error: (error, stackTrace) => Text(error.toString()),
-                                            loading: () => const CircularProgressIndicator(),
-                                          );
-                                        },
-                                      )),
+                                    ),
+                                  ),
                                   BounceFromBottomAnimation(
                                       delay: 4,
                                       child: Row(

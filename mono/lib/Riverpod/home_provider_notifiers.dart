@@ -10,6 +10,7 @@ final homeStateProvider = ChangeNotifierProvider<HomeStateNotifier>((ref) {
 
 class HomeStateNotifier extends ChangeNotifier {
   final _homeState = ImpleHomeRepository();
+  int selectedIndex = 0;
 
   List<String> items = ['Day', ' Week', "Month", "Year"];
   UserModel userModel = UserModel();
@@ -20,6 +21,7 @@ class HomeStateNotifier extends ChangeNotifier {
 
   Future<void> fetchUserInfo() async {
     final user = await _homeState.fetcUserInfo();
+
     if (user.isSuccess()) {
       final getUser = user.tryGetSuccess();
       userModel = getUser!;
@@ -28,7 +30,7 @@ class HomeStateNotifier extends ChangeNotifier {
     }
   }
 
-  Future<bool?> getUserFinance() async {
+  Future<void> getUserFinance() async {
     final result = await _homeState.getUserFinance();
     if (result.isSuccess()) {
       final finance = result.tryGetSuccess();
@@ -37,13 +39,10 @@ class HomeStateNotifier extends ChangeNotifier {
         isFinanceLoading = false;
         isEmpty = true;
         notifyListeners();
-        return null;
       }
 
       currentFinance = finance;
       isFinanceLoading = false;
-      return true;
     }
-    return false;
   }
 }

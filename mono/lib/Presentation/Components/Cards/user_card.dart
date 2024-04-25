@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mono/Core/Constants/Path/icon_path.dart';
 import 'package:mono/Core/Utility/Extensions/icon_path_extension.dart';
-import 'package:mono/Presentation/Screens/Home/Widgets/home_view.dart';
 
 import '../../../Riverpod/home_provider_notifiers.dart';
+import '../custom_progress.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
